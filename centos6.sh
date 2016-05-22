@@ -82,27 +82,27 @@ echo "screenfetch" >> .bash_profile
 
 # install webserver
 cd
-wget -O /etc/nginx/nginx.conf "https://debianscript.googlecode.com/svn/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://github.com/wiwekareka/debianscript/blob/master/nginx.conf"
 sed -i 's/www-data/nginx/g' /etc/nginx/nginx.conf
 mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://debianscript.googlecode.com/svn/index.html"
+wget -O /home/vps/public_html/index.html "https://github.com/wiwekareka/debianscript/blob/master/index.html"
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
 rm /etc/nginx/conf.d/*
-wget -O /etc/nginx/conf.d/vps.conf "https://debianscript.googlecode.com/svn/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://github.com/wiwekareka/debianscript/blob/master/vps.conf"
 sed -i 's/apache/nginx/g' /etc/php-fpm.d/www.conf
 chmod -R +rx /home/vps
 service php-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://debianscript.googlecode.com/svn/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://github.com/wiwekareka/debianscript/blob/master/openvpn-debian.tar"
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://debianscript.googlecode.com/svn/1194-centos.conf"
+wget -O /etc/openvpn/1194.conf "https://github.com/wiwekareka/debianscript/blob/master/1194-centos.conf"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /etc/openvpn/1194.conf "https://debianscript.googlecode.com/svn/1194-centos64.conf"
+  wget -O /etc/openvpn/1194.conf "https://github.com/wiwekareka/debianscript/blob/master/1194-centos64.conf"
 fi
-wget -O /etc/iptables.up.rules "https://debianscript.googlecode.com/svn/iptables.up.rules"
+wget -O /etc/iptables.up.rules "https://github.com/wiwekareka/debianscript/blob/master/iptables.up.rules"
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.d/rc.local
 sed -i $MYIP2 /etc/iptables.up.rules;
@@ -115,7 +115,7 @@ cd
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://debianscript.googlecode.com/svn/1194-client.conf"
+wget -O /etc/openvpn/1194-client.ovpn "https://github.com/wiwekareka/debianscript/blob/master/1194-client.conf"
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false KangArie
@@ -127,9 +127,9 @@ cp client.tar /home/vps/public_html/
 cd
 
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://debianscript.googlecode.com/svn/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://github.com/wiwekareka/debianscript/blob/master/badvpn-udpgw"
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://debianscript.googlecode.com/svn/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://github.com/wiwekareka/debianscript/blob/master/badvpn-udpgw64"
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.d/rc.local
@@ -138,8 +138,8 @@ screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # install mrtg
 cd /etc/snmp/
-wget -O /etc/snmp/snmpd.conf "https://debianscript.googlecode.com/svn/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://debianscript.googlecode.com/svn/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://github.com/wiwekareka/debianscript/blob/master/snmpd.conf"
+wget -O /root/mrtg-mem.sh "https://github.com/wiwekareka/debianscript/blob/master/mrtg-mem.sh"
 chmod +x /root/mrtg-mem.sh
 service snmpd restart
 chkconfig snmpd on
@@ -191,7 +191,7 @@ chkconfig fail2ban on
 
 # install squid
 yum -y install squid
-wget -O /etc/squid/squid.conf "https://debianscript.googlecode.com/svn/squid-centos.conf"
+wget -O /etc/squid/squid.conf "https://github.com/wiwekareka/debianscript/blob/master/squid-centos.conf"
 sed -i $MYIP2 /etc/squid/squid.conf;
 service squid restart
 chkconfig squid on
@@ -206,9 +206,9 @@ chkconfig webmin on
 
 # pasang bmon
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/bmon "https://debianscript.googlecode.com/svn/bmon64"
+  wget -O /usr/bin/bmon "https://github.com/wiwekareka/debianscript/blob/master/bmon64"
 else
-  wget -O /usr/bin/bmon "https://debianscript.googlecode.com/svn/bmon"
+  wget -O /usr/bin/bmon "https://github.com/wiwekareka/debianscript/blob/master/bmon"
 fi
 chmod +x /usr/bin/bmon
 
@@ -216,8 +216,8 @@ chmod +x /usr/bin/bmon
 cd
 curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" > speedtest_cli.py
 curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" > ps_mem.py
-wget -O bench-network.sh "https://debianscript.googlecode.com/svn/bench-network.sh"
-wget -O limit.sh "https://debianscript.googlecode.com/svn/limit.sh"
+wget -O bench-network.sh "https://github.com/wiwekareka/debianscript/blob/master/bench-network.sh"
+wget -O limit.sh "https://github.com/wiwekareka/debianscript/blob/master/limit.sh"
 curl https://debianscript.googlecode.com/svn/user-login.sh > user-login.sh
 curl https://debianscript.googlecode.com/svn/user-expire.sh > user-expire.sh
 curl https://debianscript.googlecode.com/svn/user-limit.sh > user-limit.sh
