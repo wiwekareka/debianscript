@@ -24,8 +24,8 @@ sed -i 's/AcceptEnv/#AcceptEnv/g' /etc/ssh/sshd_config
 service ssh restart
 
 # set repo
-wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/wiwekareka/debianscript/master/sources.list.debian7"
-wget "http://www.dotdeb.org/dotdeb.gpg"
+wget -O /etc/apt/sources.list "https://raw.githubusercontent.com/wiwekareka/debianscript/master/sources.list.debian7" --no-check-certificate
+wget "http://www.dotdeb.org/dotdeb.gpg" --no-check-certificate
 cat dotdeb.gpg | apt-key add -;rm dotdeb.gpg
 
 # remove unused
@@ -61,7 +61,7 @@ service vnstat restart
 
 # install screenfetch
 cd
-curl -L https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev > screenfetch-dev
+curl -L https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev --no-check-certificate > screenfetch-dev
 mv screenfetch-dev /usr/bin/screenfetch
 chmod +x /usr/bin/screenfetch
 echo "clear" >> .profile
@@ -71,24 +71,24 @@ echo "screenfetch" >> .profile
 cd
 rm /etc/nginx/sites-enabled/default
 rm /etc/nginx/sites-available/default
-wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/nginx.conf"
+wget -O /etc/nginx/nginx.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/nginx.conf" --no-check-certificate
 mkdir -p /home/vps/public_html
-wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/wiwekareka/debianscript/master/index.html"
+wget -O /home/vps/public_html/index.html "https://raw.githubusercontent.com/wiwekareka/debianscript/master/index.html" --no-check-certificate
 echo "<?php phpinfo(); ?>" > /home/vps/public_html/info.php
-wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/vps.conf"
+wget -O /etc/nginx/conf.d/vps.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/vps.conf" --no-check-certificate
 sed -i 's/listen = \/var\/run\/php5-fpm.sock/listen = 127.0.0.1:9000/g' /etc/php5/fpm/pool.d/www.conf
 service php5-fpm restart
 service nginx restart
 
 # install openvpn
-wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/wiwekareka/debianscript/master/openvpn-debian.tar"
+wget -O /etc/openvpn/openvpn.tar "https://raw.githubusercontent.com/wiwekareka/debianscript/master/openvpn-debian.tar" --no-check-certificate
 cd /etc/openvpn/
 tar xf openvpn.tar
-wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/1194.conf"
+wget -O /etc/openvpn/1194.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/1194.conf" --no-check-certificate
 service openvpn restart
 sysctl -w net.ipv4.ip_forward=1
 sed -i 's/#net.ipv4.ip_forward=1/net.ipv4.ip_forward=1/g' /etc/sysctl.conf
-wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/wiwekareka/debianscript/master/iptables.up.rules"
+wget -O /etc/iptables.up.rules "https://raw.githubusercontent.com/wiwekareka/debianscript/master/iptables.up.rules" --no-check-certificate
 sed -i '$ i\iptables-restore < /etc/iptables.up.rules' /etc/rc.local
 sed -i $MYIP2 /etc/iptables.up.rules;
 iptables-restore < /etc/iptables.up.rules
@@ -96,7 +96,7 @@ service openvpn restart
 
 # configure openvpn client config
 cd /etc/openvpn/
-wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/wiwekareka/debianscript/master/1194-client.conf"
+wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/wiwekareka/debianscript/master/1194-client.conf" --no-check-certificate
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
 PASS=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 15 | head -n 1`;
 useradd -M -s /bin/false KangArie
@@ -108,17 +108,17 @@ cp client.tar /home/vps/public_html/
 cd
 
 # install badvpn
-wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/wiwekareka/debianscript/master/badvpn-udpgw"
+wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/wiwekareka/debianscript/master/badvpn-udpgw" --no-check-certificate
 if [ "$OS" == "x86_64" ]; then
-  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/wiwekareka/debianscript/master/badvpn-udpgw64"
+  wget -O /usr/bin/badvpn-udpgw "https://raw.githubusercontent.com/wiwekareka/debianscript/master/badvpn-udpgw64" --no-check-certificate
 fi
 sed -i '$ i\screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300' /etc/rc.local
 chmod +x /usr/bin/badvpn-udpgw
 screen -AmdS badvpn badvpn-udpgw --listen-addr 127.0.0.1:7300
 
 # install mrtg
-wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/snmpd.conf"
-wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/mrtg-mem.sh"
+wget -O /etc/snmp/snmpd.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/snmpd.conf" --no-check-certificate
+wget -O /root/mrtg-mem.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/mrtg-mem.sh" --no-check-certificate
 chmod +x /root/mrtg-mem.sh
 cd /etc/snmp/
 sed -i 's/TRAPDRUN=no/TRAPDRUN=yes/g' /etc/default/snmpd
@@ -126,7 +126,7 @@ service snmpd restart
 snmpwalk -v 1 -c public localhost 1.3.6.1.4.1.2021.10.1.3.1
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg.cfg public@localhost
-curl "https://debianscript.googlecode.com/svn/mrtg.conf" >> /etc/mrtg.cfg
+curl "https://debianscript.googlecode.com/svn/mrtg.conf" >> /etc/mrtg.cfg --no-check-certificate
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg.cfg
@@ -169,13 +169,13 @@ apt-get -y install fail2ban;service fail2ban restart
 
 # install squid3
 apt-get -y install squid3
-wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/squid3.conf"
+wget -O /etc/squid3/squid.conf "https://raw.githubusercontent.com/wiwekareka/debianscript/master/squid3.conf" --no-check-certificate
 sed -i $MYIP2 /etc/squid3/squid.conf;
 service squid3 restart
 
 # install webmin
 cd
-wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.680_all.deb"
+wget "http://prdownloads.sourceforge.net/webadmin/webmin_1.680_all.deb" --no-check-certificate
 dpkg --install webmin_1.680_all.deb;
 apt-get -y -f install;
 rm /root/webmin_1.680_all.deb
@@ -184,10 +184,10 @@ service vnstat restart
 
 # downlaod script
 cd
-curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" > speedtest_cli.py
-curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" > ps_mem.py
-wget -O bench-network.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/bench-network.sh"
-wget -O limit.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/limit.sh"
+curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" --no-check-certificate > speedtest_cli.py
+curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate > ps_mem.py
+wget -O bench-network.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/bench-network.sh" --no-check-certificate
+wget -O limit.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/limit.sh" --no-check-certificate
 curl https://debianscript.googlecode.com/svn/user-login.sh > user-login.sh
 curl https://debianscript.googlecode.com/svn/user-expire.sh > user-expire.sh
 curl https://debianscript.googlecode.com/svn/user-limit.sh > user-limit.sh
