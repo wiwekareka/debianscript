@@ -152,7 +152,7 @@ service dropbear restart
 
 # install vnstat gui
 cd /home/vps/public_html/
-wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz
+wget http://www.sqweek.com/sqweek/files/vnstat_php_frontend-1.5.1.tar.gz --no-check-certificate
 tar xf vnstat_php_frontend-1.5.1.tar.gz
 rm vnstat_php_frontend-1.5.1.tar.gz
 mv vnstat_php_frontend-1.5.1 vnstat
@@ -188,9 +188,9 @@ curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" --n
 curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate > ps_mem.py
 wget -O bench-network.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/bench-network.sh" --no-check-certificate
 wget -O limit.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/limit.sh" --no-check-certificate
-curl https://debianscript.googlecode.com/svn/user-login.sh > user-login.sh
-curl https://debianscript.googlecode.com/svn/user-expire.sh > user-expire.sh
-curl https://debianscript.googlecode.com/svn/user-limit.sh > user-limit.sh
+curl https://debianscript.googlecode.com/svn/user-login.sh --no-check-certificate > user-login.sh
+curl https://debianscript.googlecode.com/svn/user-expire.sh --no-check-certificate > user-expire.sh
+curl https://debianscript.googlecode.com/svn/user-limit.sh --no-check-certificate > user-limit.sh
 echo "0 0 * * * root /root/user-expire.sh" > /etc/cron.d/user-expire
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.local
 chmod +x bench-network.sh
