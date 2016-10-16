@@ -77,7 +77,7 @@ chkconfig vnstat on
 
 # install screenfetch
 cd
-curl -L https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev --no-check-certificate > screenfetch-dev
+curl -L https://raw.github.com/KittyKatt/screenFetch/master/screenfetch-dev > screenfetch-dev
 mv screenfetch-dev /usr/bin/screenfetch
 chmod +x /usr/bin/screenfetch
 echo "clear" >> .bash_profile
@@ -150,7 +150,7 @@ chkconfig snmpd on
 snmpwalk -v 1 -c public localhost | tail
 mkdir -p /home/vps/public_html/mrtg
 cfgmaker --zero-speed 100000000 --global 'WorkDir: /home/vps/public_html/mrtg' --output /etc/mrtg/mrtg.cfg public@localhost
-curl "https://debianscript.googlecode.com/svn/mrtg.conf" >> /etc/mrtg/mrtg.cfg --no-check-certificate
+curl "https://debianscript.googlecode.com/svn/mrtg.conf" >> /etc/mrtg/mrtg.cfg
 sed -i 's/WorkDir: \/var\/www\/mrtg/# WorkDir: \/var\/www\/mrtg/g' /etc/mrtg/mrtg.cfg
 sed -i 's/# Options\[_\]: growright, bits/Options\[_\]: growright/g' /etc/mrtg/mrtg.cfg
 indexmaker --output=/home/vps/public_html/mrtg/index.html /etc/mrtg/mrtg.cfg
@@ -217,13 +217,13 @@ chmod +x /usr/bin/bmon
 
 # downlaod script
 cd
-curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" --no-check-certificate > speedtest_cli.py
-curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" --no-check-certificate > ps_mem.py
+curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" > speedtest_cli.py
+curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" > ps_mem.py
 wget -O bench-network.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/bench-network.sh" --no-check-certificate
 wget -O limit.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/limit.sh" --no-check-certificate
-curl https://debianscript.googlecode.com/svn/user-login.sh --no-check-certificate > user-login.sh
-curl https://debianscript.googlecode.com/svn/user-expire.sh --no-check-certificate > user-expire.sh
-curl https://debianscript.googlecode.com/svn/user-limit.sh --no-check-certificate > user-limit.sh
+curl https://debianscript.googlecode.com/svn/user-login.sh > user-login.sh
+curl https://debianscript.googlecode.com/svn/user-expire.sh > user-expire.sh
+curl https://debianscript.googlecode.com/svn/user-limit.sh > user-limit.sh
 echo "0 0 * * * root /root/user-expire.sh" > /etc/cron.d/user-expire
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.local
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.d/rc.local
