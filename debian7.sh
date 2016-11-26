@@ -179,7 +179,7 @@ service vnstat restart
 
 # downlaod script
 cd
-curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest_cli.py" > speedtest_cli.py
+curl -L "https://raw.github.com/sivel/speedtest-cli/master/speedtest.py" > speedtest-cli
 curl -L "https://raw.github.com/pixelb/ps_mem/master/ps_mem.py" > ps_mem.py
 wget -O bench-network.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/bench-network.sh" --no-check-certificate
 wget -O limit.sh "https://raw.githubusercontent.com/wiwekareka/debianscript/master/limit.sh" --no-check-certificate
@@ -189,7 +189,7 @@ curl https://debianscript.googlecode.com/svn/user-limit.sh > user-limit.sh
 echo "0 0 * * * root /root/user-expire.sh" > /etc/cron.d/user-expire
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.local
 chmod +x bench-network.sh
-chmod +x speedtest_cli.py
+chmod +x speedtest_cli
 chmod +x ps_mem.py
 chmod +x user-login.sh
 chmod +x user-expire.sh
