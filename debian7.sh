@@ -98,8 +98,8 @@ service openvpn restart
 cd /etc/openvpn/
 wget -O /etc/openvpn/1194-client.ovpn "https://raw.githubusercontent.com/wiwekareka/debianscript/master/1194-client.conf" --no-check-certificate
 sed -i $MYIP2 /etc/openvpn/1194-client.ovpn;
-tar cf client.tar 1194-client.ovpn
-cp client.tar /home/vps/public_html/
+# tar cf client.tar 1194-client.ovpn
+cp 1194-client.ovpn /home/vps/public_html/
 cd
 
 # install badvpn
