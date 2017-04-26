@@ -221,7 +221,7 @@ echo "-------"  | tee -a log-install.txt
 echo "OpenVPN  : TCP 1194 (client config : http://$MYIP:81/1194-client.ovpn)"  | tee -a log-install.txt
 echo "OpenSSH  : 22, 80, 143"  | tee -a log-install.txt
 echo "Dropbear : 109, 110, 443"  | tee -a log-install.txt
-echo "Squid3   : 8080 (limit to IP SSH)"  | tee -a log-install.txt
+echo "Squid3   : 3128, 8000, 8080 (limit to IP SSH)"  | tee -a log-install.txt
 echo "badvpn   : badvpn-udpgw port 7300"  | tee -a log-install.txt
 echo "nginx    : 81"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
