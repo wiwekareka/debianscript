@@ -220,7 +220,7 @@ echo "0 0 * * * root /root/user-expire.sh" > /etc/cron.d/user-expire
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.local
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.d/rc.local
 chmod +x bench-network.sh
-chmod +x speedtest_cli
+chmod +x speedtest-cli
 chmod +x ps_mem.py
 chmod +x user-login.sh
 chmod +x user-expire.sh
@@ -276,7 +276,7 @@ echo "Script"  | tee -a log-install.txt
 echo "------"  | tee -a log-install.txt
 echo "screenfetch"  | tee -a log-install.txt
 echo "./ps_mem.py"  | tee -a log-install.txt
-echo "./speedtest_cli.py --share"  | tee -a log-install.txt
+echo "./speedtest-cli.py --share"  | tee -a log-install.txt
 echo "./bench-network.sh"  | tee -a log-install.txt
 echo ""  | tee -a log-install.txt
 echo "Fitur lain"  | tee -a log-install.txt
