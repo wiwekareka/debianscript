@@ -189,7 +189,7 @@ curl https://debianscript.googlecode.com/svn/user-limit.sh > user-limit.sh
 echo "0 0 * * * root /root/user-expire.sh" > /etc/cron.d/user-expire
 sed -i '$ i\screen -AmdS limit /root/limit.sh' /etc/rc.local
 chmod +x bench-network.sh
-chmod +x speedtest_cli
+chmod +x speedtest-cli
 chmod +x ps_mem.py
 chmod +x user-login.sh
 chmod +x user-expire.sh
